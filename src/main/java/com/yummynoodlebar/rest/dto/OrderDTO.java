@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name = "order")
 public class OrderDTO implements Serializable {
 
     private Date dateTimeOfSubmission;

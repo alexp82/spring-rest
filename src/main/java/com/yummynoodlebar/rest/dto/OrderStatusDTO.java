@@ -1,10 +1,11 @@
 package com.yummynoodlebar.rest.dto;
 
 import com.yummynoodlebar.core.events.orders.OrderStatusDetails;
-
 import java.util.Date;
 import java.util.UUID;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "orderstatus")
 public class OrderStatusDTO {
 
   private UUID orderId;

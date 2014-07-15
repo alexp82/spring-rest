@@ -11,3 +11,5 @@ target/
 .project
 
 
+/.nb-gradle/private/
+/.nb-gradle/profiles/private/

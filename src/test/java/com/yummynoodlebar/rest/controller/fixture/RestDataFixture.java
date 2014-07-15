@@ -6,6 +6,7 @@
 package com.yummynoodlebar.rest.controller.fixture;
 
 import com.yummynoodlebar.core.domain.Order;
+import static com.yummynoodlebar.core.domain.fixtures.OrdersFixtures.YUMMY_ITEM;
 import com.yummynoodlebar.core.events.orders.AllOrdersEvent;
 import com.yummynoodlebar.core.events.orders.OrderDetails;
 import java.util.ArrayList;
@@ -20,10 +21,8 @@ import java.util.UUID;
  */
 public class RestDataFixture {
 
-    public static final String YUMMY_ITEM = "yummy1";
-
     public static AllOrdersEvent allOrders() {
-        List<OrderDetails> orders = new ArrayList<OrderDetails>();
+        List<OrderDetails> orders = new ArrayList<>();
 
         orders.add(standardOrderDetails());
         orders.add(standardOrderDetails());

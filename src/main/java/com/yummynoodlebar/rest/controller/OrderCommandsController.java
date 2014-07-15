@@ -5,12 +5,12 @@
  */
 package com.yummynoodlebar.rest.controller;
 
-import com.yummynoodlebar.core.domain.Order;
 import com.yummynoodlebar.core.events.orders.CreateOrderEvent;
 import com.yummynoodlebar.core.events.orders.DeleteOrderEvent;
 import com.yummynoodlebar.core.events.orders.OrderCreatedEvent;
 import com.yummynoodlebar.core.events.orders.OrderDeletedEvent;
 import com.yummynoodlebar.core.services.OrderService;
+import com.yummynoodlebar.rest.dto.OrderDTO;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class OrderCommandsController {
     private OrderService orderService;
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public ResponseEntity<Order> cancelOrder(@PathVariable String id) {
+    public ResponseEntity<OrderDTO> cancelOrder(@PathVariable String id) {
 
         OrderDeletedEvent orderDeleted = orderService.deleteOrder(new DeleteOrderEvent(UUID.fromString(id)));
 
@@ -47,7 +47,7 @@ public class OrderCommandsController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        Order order = Order.fromOrderDetails(orderDeleted.getDetails());
+        OrderDTO order = OrderDTO.fromOrderDetails(orderDeleted.getDetails());
 
         if (orderDeleted.isDeletionCompleted()) {
             return new ResponseEntity<>(order, HttpStatus.OK);
@@ -57,11 +57,11 @@ public class OrderCommandsController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Order> createOrder(@RequestBody Order order, UriComponentsBuilder builder) {
+    public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO order, UriComponentsBuilder builder) {
 
         OrderCreatedEvent orderCreated = orderService.createOrder(new CreateOrderEvent(order.toOrderDetails()));
 
-        Order newOrder = Order.fromOrderDetails(orderCreated.getDetails());
+        OrderDTO newOrder = OrderDTO.fromOrderDetails(orderCreated.getDetails());
 
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(
