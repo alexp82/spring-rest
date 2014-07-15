@@ -6,6 +6,7 @@
 package com.yummynoodlebar.rest.controller.fixture;
 
 import com.yummynoodlebar.core.domain.Order;
+import com.yummynoodlebar.core.domain.fixtures.OrdersFixtures;
 import static com.yummynoodlebar.core.domain.fixtures.OrdersFixtures.YUMMY_ITEM;
 import com.yummynoodlebar.core.events.orders.AllOrdersEvent;
 import com.yummynoodlebar.core.events.orders.OrderDetails;
@@ -52,6 +53,6 @@ public class RestDataFixture {
     }
 
     public static String standardOrderJSON() {
-        return "{ \"items\": { \"yummy1\": 12, \"yummy15\": 42 } }";
+        return "{ \"items\": { \"" + OrdersFixtures.YUMMY_ITEM + "\": 12, \"yummy15\": 42 } }";
     }
 }
